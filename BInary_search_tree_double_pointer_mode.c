@@ -1,10 +1,15 @@
+/******************************************************************************
 
+This is a binary search tree where i worked with double pointer concept.
+
+*******************************************************************************/
 
 #include <stdio.h>
 #include<stdlib.h>
 struct BstNode* GetNewNode(int);
 int findMin(struct BstNode*);
 void Insert(struct BstNode**,int);
+int findMax(struct BstNode*);
 
 struct BstNode{
     int data;
@@ -20,6 +25,18 @@ int findMin(struct BstNode* current){
         current = current->left;
     }
     return current->data;
+    
+}
+
+int findMax(struct BstNode* current){
+    
+    if(current==NULL)return -1;
+    else if(current->right!=NULL){
+        
+       return findMax(current->right);
+    }
+   return current->data;
+   
     
 }
 
@@ -44,14 +61,14 @@ void Insert(struct BstNode** root,int data){
 
 int main(){
    struct BstNode* root = NULL;
-   int min;
+
+    
     Insert(&root,3);
     Insert(&root,10);
     Insert(&root,20);
     Insert(&root,25);
     Insert(&root,9);
     Insert(&root,12);
-    min = findMin(root);
-    printf("%d",min);
+    printf("%d\n%d",findMin(root),findMax(root));
 return 0;    
 }
